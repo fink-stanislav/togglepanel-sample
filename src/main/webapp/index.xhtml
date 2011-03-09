@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:view>
+    <h:head>
+        <title>Toggle panel</title>
+        <link rel="stylesheet" href="css/style.css"/>
+    </h:head>
+
+    <h:body>
+        <a4j:commandLink value="Toggle panel" render="debugPanel"
+                         oncomplete="#{rich:component('debugPanel')}.show()"/>
+        <br/>
+        <a4j:commandLink value="Seller Info" render="sellerInfo"
+                         oncomplete="#{rich:component('sellerInfo')}.show()"/>
+
+        <rich:dataTable>
+            <rich:column>
+                <f:facet name="header">
+                    <h:outputText value="col1"/>
+                </f:facet>
+            </rich:column>
+            <rich:column>
+                <f:facet name="header">
+                    <h:outputText value="col2"/>
+                </f:facet>
+            </rich:column>
+        </rich:dataTable>
+
+        <rich:popupPanel modal="true" id="sellerInfo" width="350" height="100">
+            <f:facet name="header">
+                <h:outputText value="Seller Information"/>
+            </f:facet>
+            <f:facet name="controls">
+                <h:graphicImage url="images/close.jpeg" styleClass="square-image"
+                                onclick="#{rich:component('sellerInfo')}.hide()"/>
+            </f:facet>
+            <a4j:outputPanel ajaxRendered="true">
+                <h:outputText value="#{sellerBean.city}, "/>
+                <h:outputText value="#{sellerBean.street}"/>
+            </a4j:outputPanel>
+        </rich:popupPanel>
+
+        <rich:popupPanel modal="true" id="debugPanel" width="350" height="100">
+            <f:facet name="header">
+                <h:outputText value="Sample"/>
+            </f:facet>
+            <f:facet name="controls">
+                <h:graphicImage url="images/close.jpeg" styleClass="square-image"
+                                onclick="#{rich:component('debugPanel')}.hide()"/>
+            </f:facet>
+            <h:form id="toggleForm">
+                <a4j:outputPanel ajaxRendered="true">
+                    <rich:togglePanel id="debugToggle" switchType="ajax">
+                        <rich:togglePanelItem id="include1">
+                            <ui:include src="/WEB-INF/include1.xhtml"/>
+                        </rich:togglePanelItem>
+                        <rich:togglePanelItem id="include2">
+                            <ui:include src="/WEB-INF/include2.xhtml"/>
+                        </rich:togglePanelItem>
+                    </rich:togglePanel>
+                </a4j:outputPanel>
+            </h:form>
+        </rich:popupPanel>
+    </h:body>
+</f:view>
+</html>

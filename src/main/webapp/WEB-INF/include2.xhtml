@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:panelGrid columns="3" styleClass="panel-text">
+        <h:outputText value="Property Two"/>
+        <h:inputText id="propertyTwo" value="#{debugBean.propertyTwo}" required="true"/>
+        <rich:message for="propertyTwo"/>
+    </h:panelGrid>
+    <h:commandButton value="Previous">
+        <rich:toggleControl disableDefault="true" targetItem="@prev" event="click"/>
+        <a4j:ajax bypassUpdates="true"/>
+    </h:commandButton>
+</ui:composition>
